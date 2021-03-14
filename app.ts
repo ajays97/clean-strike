@@ -53,8 +53,6 @@ const startGame = async (): Promise<void> => {
 
         // Switch player
         togglePlayer = !togglePlayer;
-
-
     }
 
 };
