@@ -1,0 +1,13 @@
+{
+    "chooseOutcome": "Choose an outcome from the list below",
+    "outcomeList": ["1. Strike", "2. Multistrike", "3. Red strike", "4. Striker strike",
+    "5. Defunct coin", "6. None"],
+    "howManyCoins": "How many coins",
+    "coinsLeft": "Coins left",
+    "points": "Points",
+    "emptyStrikes": "Empty Strikes",
+    "fouls": "Fouls",
+    "player": "Player",
+    "gameResultDraw": "Nobody wins. The game is a draw.",
+    "gameWon": "<player> won the game. Final Score: <score1> - <score2>"
+}
