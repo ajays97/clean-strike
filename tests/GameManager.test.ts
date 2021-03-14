@@ -71,8 +71,8 @@ describe('GameManager', function () {
     });
 
     it('should assign player B as winner after coins left is 0', function () {
-        expect(gameManager.getWinner()).toEqual(null);
-        
+        expect(gameManager.getWinner()).toBeNull();
+
         gameManager.playTurn(Play.MULTI_STRIKE, getCoinsForPlay(Play.MULTI_STRIKE));
         expect(gameManager.getCoins()).toEqual(0);
 
@@ -81,3 +81,29 @@ describe('GameManager', function () {
 
 
 });
+
+describe('GameManager::checkForWin', function () {
+    const player1 = new Player('A');
+    const player2 = new Player('B');
+    const gameManager = GameManager.getInstance(9, [player1, player2], player1);
+
+    it('should return null no players have minimum win points of 5', function () {
+        const winner = gameManager.checkForWin([1, 4]);
+        expect(winner).toBeNull();
+    });
+
+    it('should return player A if A is 3 points ahead of B', function () {
+        const winner = gameManager.checkForWin([5, 2]);
+        expect(winner.getName()).toEqual('A');
+    });
+
+    it('should return player B if B is 3 points ahead of A', function () {
+        const winner = gameManager.checkForWin([1, 6]);
+        expect(winner.getName()).toEqual('B');
+    });
+
+    it('should return null for draw if minimum difference is unsatisfied', function () {
+        const winner = gameManager.checkForWin([5, 6]);
+        expect(winner).toBeNull();
+    });
+;});

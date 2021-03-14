@@ -72,7 +72,10 @@ class GameManager {
         this.setCoins(Math.max(0, this.coins - coinsPlayed));
 
         if (this.coins === 0) {
-            this.winner = this.checkForWin();
+            const [player1, player2] = [...this.players];
+            const player1Points = player1.getPoints();
+            const player2Points = player2.getPoints();
+            this.winner = this.checkForWin([player1Points, player2Points]);
 
             if (!this.winner) {
                 this.setBoardState(BoardState.END);     // Game Over
@@ -83,7 +86,7 @@ class GameManager {
                 this.setBoardState(BoardState.END);     // Game Over
                 return {
                     message: `${localStrings.gameWon.replace(`<player>`,
-                    this.winner.getName())
+                        this.winner.getName())
                         .replace('<score1>', `${this.players[0].getPoints()}`)
                         .replace('<score2>', `${this.players[1].getPoints()}`)}`,
                     player: this.winner,
@@ -97,10 +100,10 @@ class GameManager {
      * Update code here to check for winner amidst 'n' players
      * @returns Returns the winning player if any or null;
      */
-    public checkForWin(): Player {
+    public checkForWin(playerPoints: number[]): Player {
         const [player1, player2] = [...this.players];
-        const player1Points = player1.getPoints();
-        const player2Points = player2.getPoints();
+        const [player1Points, player2Points] = [...playerPoints];
+
         if (player1Points >= MINIMUM_WIN_POINTS || player2Points >= MINIMUM_WIN_POINTS) {
             const pointsDifference = player1Points - player2Points;
 
