@@ -2,6 +2,7 @@
     "chooseOutcome": "Choose an outcome from the list below",
     "outcomeList": ["1. Strike", "2. Multistrike", "3. Red strike", "4. Striker strike",
     "5. Defunct coin", "6. None"],
+    "redStrikeUsed": "Red has already been pocketed. Choose a valid outcome.",
     "howManyCoins": "How many coins",
     "coinsLeft": "Coins left",
     "points": "Points",

@@ -19,6 +19,8 @@ const startGame = async (): Promise<void> => {
 
     const playerNames = await askPlayerNames();
 
+    let gameMessage: string = null;
+
     // Create player objects for Player 1 and Player 2
     const player1: Player = new Player(playerNames.player1);
     const player2: Player = new Player(playerNames.player2);
@@ -35,12 +37,20 @@ const startGame = async (): Promise<void> => {
         gameManager.setPlayer(player);
 
         console.log(`${localStrings.player} ${gameManager.getPlayer().name}: ${localStrings.chooseOutcome}\n`);
-        console.log(`${localStrings.outcomeList.toString().replace(/,/g, '\n')}\n`);
+        console.log(`${gameMessage ? gameMessage + '\n\n' : ''} ${localStrings.outcomeList.toString().replace(/,/g, '\n')}\n`);
 
-        const inputTurn = await inquirer.prompt({ message: '>', name: 'playOutcome' });
+        const inputTurn = await inquirer.prompt({ message: '>', name: 'playOutcome'});
 
         const playOutcome = parseInt(inputTurn.playOutcome);
         const inputCoins = getCoinsForPlay(playOutcome);
+    
+        if (playOutcome === Play.RED_STRIKE && gameManager.getRedCoins() === 0) {
+            gameMessage = `${localStrings.redStrikeUsed}`;
+            continue;
+        } else {
+            gameManager.setRedCoins(0);
+        }
+
         const gameResultState: GameState = gameManager.playTurn(playOutcome, inputCoins);
 
         if (gameResultState && gameResultState.player) {
@@ -53,6 +63,8 @@ const startGame = async (): Promise<void> => {
 
         // Switch player
         togglePlayer = !togglePlayer;
+        gameMessage = null;
+
     }
 
 };

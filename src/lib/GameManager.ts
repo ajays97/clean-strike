@@ -9,6 +9,7 @@ class GameManager {
     private boardState: number;
     private player: Player;
     private winner: Player;
+    private redCoins: number;
     private players: Player[];
 
     private constructor(coins: number, players: Player[], player: Player) {
@@ -17,6 +18,7 @@ class GameManager {
         this.winner = null;
         this.player = player;
         this.players = players;
+        this.redCoins = 1;
     }
 
     public static getInstance(coins: number = 9, players: Player[], player: Player): GameManager {
@@ -25,6 +27,14 @@ class GameManager {
         }
 
         return GameManager._instance;
+    };
+
+    public setRedCoins(redCoins: number) {
+        this.redCoins = redCoins;
+    };
+
+    public getRedCoins() {
+        return this.redCoins;
     };
 
     public setPlayer(player: Player) {
