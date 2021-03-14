@@ -1,13 +1,13 @@
 import inquirer from "inquirer";
 
-import { drawHeader } from "./lib/draw-header";
-import { askPlayerNames } from './lib/inquirer';
-import GameManager, { BoardState } from "./lib/GameManager";
-import Player, { Play } from "./models/Player.model";
-import localStrings from './utils/en.json';
-import { START_COINS } from "./utils/constants";
-import GameState from "./interface/GameState.type";
-import { getCoinsForPlay } from "./utils/utils";
+import { drawHeader } from "../src/lib/draw-header";
+import { askPlayerNames } from '../src/lib/inquirer';
+import GameManager, { BoardState } from "../src/lib/GameManager";
+import Player, { Play } from "../src/models/Player.model";
+import localStrings from '../src/utils/en.json';
+import { START_COINS } from "../src/utils/constants";
+import GameState from "../src/interface/GameState.type";
+import { getCoinsForPlay } from "../src/utils/utils";
 
 console.clear();
 
@@ -37,7 +37,7 @@ const startGame = async (): Promise<void> => {
         console.log(`${localStrings.player} ${gameManager.getPlayer().name}: ${localStrings.chooseOutcome}\n`);
         console.log(`${localStrings.outcomeList.toString().replace(/,/g, '\n')}\n`);
 
-        const inputTurn = await inquirer.prompt([{ message: '>', name: 'playOutcome' }]);
+        const inputTurn = await inquirer.prompt({ message: '>', name: 'playOutcome' });
 
         const playOutcome = parseInt(inputTurn.playOutcome);
         const inputCoins = getCoinsForPlay(playOutcome);

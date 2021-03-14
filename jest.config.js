@@ -3,8 +3,8 @@ module.exports = {
         "<rootDir>"
     ],
     "testMatch": [
-        "tests/**/*.+(ts|tsx|js)",
-        "**/?(*.)+(spec|test).+(ts|tsx|js)"
+        "tests/**/*.+(ts|tsx)",
+        "**/?(*.)+(spec|test).+(ts|tsx)"
     ],
     "transform": {
         "^.+\\.(ts|tsx)$": "ts-jest"
