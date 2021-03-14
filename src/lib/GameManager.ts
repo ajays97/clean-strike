@@ -35,6 +35,14 @@ class GameManager {
         return this.player;
     };
 
+    public setPlayers(players: Player[]) {
+        this.players = players;
+    };
+
+    public getPlayers() {
+        return this.players;
+    };
+
     public setWinner(winner: Player) {
         this.winner = winner;
     };
