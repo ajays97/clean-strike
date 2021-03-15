@@ -44,11 +44,13 @@ const startGame = async (): Promise<void> => {
         const playOutcome = parseInt(inputTurn.playOutcome);
         const inputCoins = getCoinsForPlay(playOutcome);
     
-        if (playOutcome === Play.RED_STRIKE && gameManager.getRedCoins() === 0) {
-            gameMessage = `${localStrings.redStrikeUsed}`;
-            continue;
-        } else {
-            gameManager.setRedCoins(0);
+        if (playOutcome === Play.RED_STRIKE) {
+            if (gameManager.getRedCoins() === 0) {
+                gameMessage = `${localStrings.redStrikeUsed}`;
+                continue;
+            } else {
+                gameManager.setRedCoins(0);
+            }
         }
 
         const gameResultState: GameState = gameManager.playTurn(playOutcome, inputCoins);
